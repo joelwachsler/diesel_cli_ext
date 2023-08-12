@@ -459,6 +459,7 @@ fn propercase(s: &str) -> String {
 mod tests {
     use std::collections::HashMap;
     use std::io::prelude::*;
+    use pretty_assertions::assert_eq;
 
     fn file_get_contents(fname: &str) -> String {
         let mut f = ::std::fs::File::open(fname)

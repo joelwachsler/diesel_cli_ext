@@ -457,9 +457,9 @@ fn propercase(s: &str) -> String {
 
 #[cfg(test)]
 mod tests {
+    use pretty_assertions::assert_eq;
     use std::collections::HashMap;
     use std::io::prelude::*;
-    use pretty_assertions::assert_eq;
 
     fn file_get_contents(fname: &str) -> String {
         let mut f = ::std::fs::File::open(fname)
@@ -703,6 +703,24 @@ mod tests {
         assert_eq!(
             parse_output.str_model,
             file_get_contents("test_data/expected_output/schema_with_rust_style_fields.rs")
+        );
+    }
+
+    #[test]
+    fn build_with_weird_table_names() {
+        let parse_output = super::parse(
+            file_get_contents("test_data/schema_with_weird_table_names.rs"),
+            "model",
+            None,
+            true,
+            &mut HashMap::default(),
+            "2",
+            true,
+        );
+        print!("a:{}", parse_output.str_model);
+        assert_eq!(
+            parse_output.str_model,
+            file_get_contents("test_data/expected_output/schema_with_weird_table_names.rs")
         );
     }
 }

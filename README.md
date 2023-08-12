@@ -15,9 +15,9 @@ It contains 4 functions at this moment.
 `cargo install diesel_cli_ext`
 
 ## How to use
-First of all, `diesel print-schema > src/schema.rs` 
+First of all, `diesel print-schema > src/schema.rs`
 
-TL;DR: 
+TL;DR:
 
 ```
 Usage: target/debug/diesel_ext FILE [options]
@@ -46,7 +46,7 @@ Model Options:
                         set struct field names to be styled according to Rust guidelines
 
 Proto Options:
-    -t, --add-table-name 
+    -t, --add-table-name
                         Add #[table_name = x] before structs
     -p, --proto         Set as proto output
     -i, --into_proto    Set as into_proto output

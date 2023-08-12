@@ -36,17 +36,24 @@ Model Options:
                         This field adds use statements to the top of every
                         table! declaration. (can be set multiple times) e.g.
                         --import_types "diesel::sql_types::*"
+        --derive-mod "TABLENAME MODIFIER"
+                        (NOT ready)This field adds derives for certain tables.
+                        (can be set multiple times) e.g. --derive-mod
+                        "table_name +Debug" --derive-mod "table_name2 -Debug"
+    -n, --struct-name-override "STRUCT NAME OVERRIDE"
+                        This field overrides the generated struct name for
+                        certain tables. (can be set multiple times) e.g.
+                        --struct-name-override "foo bar"
+                        --struct-name-override "bar baz"
+
+Proto Options:
     -d, --derive DERIVES
                         set struct derives
     -t, --add-table-name 
                         Add #[table_name = x] before structs
-
-Proto Options:
-    -p, --proto         Set as proto output
-    -i, --into_proto    Set as into_proto output
-    -f, --from_proto    Set as from_proto output
-    -c, --class_name CLASS_NAME
-                        Set proto class name
+    -r, --rust_styled_model_fields 
+                        When creating models fields, will use rust styled
+                        names instead of database styled names
 ```
 
 (You can see it again by `diesel_ext --help`)

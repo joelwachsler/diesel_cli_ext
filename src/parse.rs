@@ -160,7 +160,12 @@ pub fn parse(args: ParseArguments) -> ParseOutput {
             ));
         } else if cmp.contains(") {") {
             // this line contains table name
-            struct_name = propercase(vec[0]);
+            struct_name = vec[0].to_string();
+            struct_name = match args.struct_name_override.get(&struct_name) {
+                Some(struct_name) => struct_name.into(),
+                None => propercase(&struct_name),
+            };
+
             if is_schema {
                 struct_name = if struct_name.contains('.') {
                     let _v: Vec<&str> = struct_name.split('.').collect();
@@ -462,7 +467,7 @@ fn propercase(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use pretty_assertions::assert_eq;
-    use std::io::prelude::*;
+    use std::{collections::HashMap, io::prelude::*};
 
     use crate::parse::ParseArguments;
 
@@ -683,7 +688,7 @@ mod tests {
             contents: file_get_contents("test_data/schema_with_weird_table_names.rs"),
             action: "model".into(),
             diesel_version: "2".into(),
-            rust_styled_fields: true,
+            struct_name_override: HashMap::from([("series".to_string(), "Series".to_string())]),
             ..Default::default()
         });
         print!("a:{}", parse_output.str_model);
